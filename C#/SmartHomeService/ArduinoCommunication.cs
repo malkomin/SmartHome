@@ -16,6 +16,7 @@ namespace WindowsService1
         public ArduinoCommunication(SqlHelper sql,Logger log)
         {
             this.log = log;
+
             this.sql = sql;
             data = new DataTable();
         }
