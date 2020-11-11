@@ -1,0 +1,20 @@
+﻿Installing assembly 'C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe
+Rolling back assembly 'C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe
+Installing assembly 'C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe
+Rolling back assembly 'C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\WindowsService1.exe

@@ -1,9 +1,0 @@
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\WindowsService1.csprojAssemblyReference.cache
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\WindowsService1.ProjectInstaller.resources
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\WindowsService1.csproj.GenerateResource.cache
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\WindowsService1.csproj.CoreCompileInputs.cache
-C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\Smart Home Service.exe.config
-C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\Smart Home Service.exe
-C:\Users\Mehmet Ali\source\repos\WindowsService1\bin\Debug\Smart Home Service.pdb
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\Smart Home Service.exe
-C:\Users\Mehmet Ali\source\repos\WindowsService1\obj\Debug\Smart Home Service.pdb
