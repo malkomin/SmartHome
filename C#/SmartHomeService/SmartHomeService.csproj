@@ -69,6 +69,7 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="ArduinoCommunication.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>

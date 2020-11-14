@@ -7,7 +7,7 @@ using System.IO;
 
 namespace WindowsService1
 {
-    class Logger
+    public class Logger
     {
         string path = AppDomain.CurrentDomain.BaseDirectory + "\\Logs";
         string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";

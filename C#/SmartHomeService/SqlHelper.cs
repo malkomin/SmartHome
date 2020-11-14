@@ -167,19 +167,24 @@ namespace WindowsService1
             }
 
         }
-        private void DeleteFromTable(DataTable data)
+        private void DeleteFromTable(DataTable data, string keyName)
         {
+            string delete;
             try
             {
                 using (connection)
                 {
                     log.WriteToFile("SQL bağlantısı açılıyor.");
                     connection.Open();
-                    string delete = "DELETE FROM " + data.TableName;
-                    using (SqlCommand com = new SqlCommand(delete, connection))
+                    foreach(DataRow row in data.Rows)
                     {
-                        com.ExecuteNonQuery();
+                        delete = "DELETE FROM " + data.TableName + " WHERE " + keyName + " = " + row[keyName];
+                        using (SqlCommand com = new SqlCommand(delete, connection))
+                        {
+                            com.ExecuteNonQuery();
+                        }
                     }
+                    
                     connection.Close();
                     log.WriteToFile("SQL bağlantısı kapatılıyor.");
                 }
