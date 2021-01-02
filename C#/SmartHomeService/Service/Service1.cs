@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.ComponentModel;
+using System.Net;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-namespace WindowsService1
+namespace SmartHomeService
 {
     public partial class Service1 : ServiceBase
     {
         BackgroundWorker worker;
-        ArduinoCommunication communication;
         Logger log;
-        SqlHelper sql;
+        AsyncServer server;
+        SensorService service;
         public Service1()
         {
+            InitializeComponent();
             log = new Logger();
-            sql = new SqlHelper(log);
-            communication = new ArduinoCommunication(sql, log);
+            service = new SensorService(log);
+            server = new AsyncServer(log, service);
             worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            InitializeComponent();
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -45,10 +41,11 @@ namespace WindowsService1
         }
         private void DoWork()
         {
-            communication.ListenPort();
+            server.Start();
         }
         protected override void OnStop()
         {
+
             log.WriteToFile("Service stopped!");
             base.OnStop();
         }

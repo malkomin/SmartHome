@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-
-namespace WindowsService1
+namespace SmartHomeService
 {
- 
     class SqlHelper
     {
         SqlConnection connection;
         SqlDataAdapter adapter;
         bool isOpen = false;
-        string conn_str = "Data Source=MALIKOODLE\\SQLSERVER;Initial Catalog=Smart_Home;Persist Security Info=True;User ID=sa;Password=1";
+        string conn_str = "Data Source=MALIKOODLE;Initial Catalog=SMARTHOME;Persist Security Info=True;User ID=sa;Password=1";
         Dictionary<string, object> columns;
         Logger log;
         string parameter;
@@ -26,7 +24,6 @@ namespace WindowsService1
             connection = new SqlConnection(conn_str);
             columns = new Dictionary<string, object>();
         }
-
         public void Insert(DataTable data)
         {
             int i = 0;
@@ -113,13 +110,14 @@ namespace WindowsService1
             return table;
 
         }
-
-        public DataTable getTable(string query)
+        public DataTable Select(string query, bool verbose)
         {
-
             DataTable data = new DataTable();
-            log.WriteToFile("SQL bağlantısı açılıyor");
-            log.WriteToFile("SQL Sorgu : " + query);
+            if(verbose)
+            {
+                log.WriteToFile("SQL bağlantısı açılıyor");
+                log.WriteToFile("SQL Sorgu : " + query);
+            }
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 if (!isOpen)
@@ -130,44 +128,66 @@ namespace WindowsService1
                 adapter = new SqlDataAdapter(query, connection);
                 data.Clear();
                 adapter.Fill(data);
-                log.WriteToFile("SQL data dolduruldu.");
+                if(verbose)
+                {
+                    log.WriteToFile("SQL data dolduruldu.");
+                }
                 connection.Close();
-                log.WriteToFile("SQL bağlantısı kapandı");
+                if(verbose)
+                {
+                    log.WriteToFile("SQL bağlantısı kapandı");
+                }
                 isOpen = false;
             }
             return data;
         }
-        public void InsertToTable(DataTable data)
+        public void InsertTable(DataTable data, bool verbose)
         {
             using (connection)
             {
-                log.WriteToFile("SQL bağlantısı açılıyor.");
+                if(verbose)
+                {
+                    log.WriteToFile("SQL bağlantısı açılıyor.");
+                }
                 if (!isOpen)
                 {
                     connection.Open();
                     isOpen = true;
                 }
-                log.WriteToFile(data.TableName + " tablosu yazılıyor.");
+                if(verbose)
+                {
+                    log.WriteToFile(data.TableName + " tablosu yazılıyor.");
+                }
                 using (SqlBulkCopy bulk = new SqlBulkCopy(connection))
                 {
                     bulk.DestinationTableName = data.TableName;
                     try
                     {
                         bulk.WriteToServer(data);
-                        log.WriteToFile(data.TableName + " tablosu yazıldı.");
+                        if(verbose)
+                        {
+                            log.WriteToFile(data.TableName + " tablosu yazıldı.");
+                        }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        if (verbose)
+                        {
+                            log.WriteToFile(e.Message);
+                        }
                     }
                 }
                 connection.Close();
                 isOpen = false;
-                log.WriteToFile("SQL bağlantısı kapatılıyor.");
+                if(verbose)
+                {
+
+                    log.WriteToFile("SQL bağlantısı kapatılıyor.");
+                }
             }
 
         }
-        private void DeleteFromTable(DataTable data, string keyName)
+        private void Delete(DataTable data, string keyName)
         {
             string delete;
             try
@@ -196,7 +216,81 @@ namespace WindowsService1
 
 
         }
+        public void Update(DataTable data, string identifierColumn, bool verbose)
+        {
+            int i = 0;
+            try
+            {
+                foreach (DataRow row in data.Rows)
+                {
+                    foreach (DataColumn col in data.Columns)
+                    {
+                        columns.Add(col.ColumnName, row.ItemArray[i]);
+                        i++;
+                    }
+                    foreach (KeyValuePair<string, object> pair in columns)
+                    {
+                        string key = pair.Key;
+                        if (key != identifierColumn)
+                        {
+                            if (parameters == "")
+                            {
+                                parameters = key + "= @" + key;
+                            }
+                            else
+                            {
+                                parameters = parameters + "," + key + "= @" + key;
+                            }
+                        }
+                    }
 
+                }
+            }
+            catch (Exception e)
+            {
+                log.WriteToFile("Table process error : " + e.Message);
+            }
+            string updateStr = "UPDATE " + data.TableName + " SET " + parameters +
+                    " WHERE " + identifierColumn + " = @" + identifierColumn;
+            if(verbose)
+            {
+                log.WriteToFile("UPDATESTR : " + updateStr);
+            }
+            
+            try
+            {
+                if (verbose)
+                {
+                    log.WriteToFile("OPENING CONNECTION UPDATE");
+                }
+                if (!isOpen)
+                {
+                    connection.Open();
+                    isOpen = true;
+                }
+                using (SqlCommand cmd = new SqlCommand(updateStr, connection))
+                {
+                    foreach (KeyValuePair<string, object> pair in columns)
+                    {
+                        cmd.Parameters.AddWithValue("@"+pair.Key, pair.Value);
+                    }
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception e)
+            {
+                log.WriteToFile("Update Error : " + e.Message);
+            }
+            finally
+            {
+                parameters = "";
+                connection.Close();
+                isOpen = false;
+                columns.Clear();
+            }
+            
+
+        }
     }
 }
 

@@ -1,0 +1,9 @@
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\bin\Debug\Smart Home Service.exe.config
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\bin\Debug\Smart Home Service.exe
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\bin\Debug\Smart Home Service.pdb
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\SmartHomeService.csprojAssemblyReference.cache
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\SmartHomeService.csproj.GenerateResource.cache
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\SmartHomeService.csproj.CoreCompileInputs.cache
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\Smart Home Service.exe
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\Smart Home Service.pdb
+C:\Users\Mehmet Ali\source\repos\malkomin\SmartHome\C#\SmartHomeService\obj\Debug\SmartHomeService.ProjectInstaller.resources

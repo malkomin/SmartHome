@@ -1,4 +1,4 @@
-﻿namespace WindowsService1
+﻿namespace SmartHomeService
 {
     partial class Service1
     {
