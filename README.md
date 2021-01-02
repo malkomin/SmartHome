@@ -1,1 +1,1 @@
-SMART HOME Projesinin yazılımsal kontrol merkezidir.
+SMART HOME Project
